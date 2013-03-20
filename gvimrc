@@ -1,2 +1,4 @@
 
+:colorscheme distinguished
+
 :NERDTree

@@ -19,3 +19,20 @@ filetype indent on
 filetype plugin indent on
 autocmd filetype FileType python set omnifunc=pythoncomplete#Complete
 autocmd filetype FileType php set omnifunc=phpcomplete#Complete
+
+set autoindent
+set completeopt=longest,menu
+
+syntax enable
+syntax on
+
+
+"check php syntax
+function! PhpCheckSyntax()
+    setlocal makeprg=\/usr/local/php/bin/php\ -l\ -n\ -d\ html_errors=off\ %
+    setlocal errorformat=%m\ in\ %f\ on\ line\ %l
+    make %
+endfunction
+
+autocmd BufWritePost *.php :call PhpCheckSyntax()
+"autocmd BufWritePost *.js :make

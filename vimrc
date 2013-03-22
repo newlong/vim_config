@@ -36,3 +36,30 @@ endfunction
 
 autocmd BufWritePost *.php :call PhpCheckSyntax()
 "autocmd BufWritePost *.js :make
+
+"check js syntax
+function! JsCheckSyntax()
+    setlocal makeprg=\/usr/local/nodejs/bin/jslint\ %
+    setlocal errorformat=%m\ in\ %f\ on\ line\ %l
+    make
+endfunction
+
+let s:showmakeWnd = "0"
+function! JsLintCheckSyntax()
+    setlocal makeprg=\/usr/local/nodejs/bin/jslint\ %
+    setlocal errorformat=%m\ in\ %f\ on\ line\ %l
+    "setlocal errorformat=%f:%l:%c:%m
+
+    if s:showmakeWnd == "0"
+        make
+    else
+        cclose
+    endif
+
+    let s:showmakeWnd = (s:showmakeWnd == "0" ? "1" : "0")
+endfunction
+
+autocmd BufWritePost *.js :call JsCheckSyntax()
+"autocmd BufWritePost *.js :call JsLintCheckSyntax()
+
+

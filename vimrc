@@ -5,7 +5,7 @@
 
 
 set hlsearch
-"set cursorline
+set cursorline
 "highlight CursorLine guibg=lightblue ctermbg=lightgray
 
 "set cursorcolumn
@@ -59,7 +59,16 @@ function! JsLintCheckSyntax()
     let s:showmakeWnd = (s:showmakeWnd == "0" ? "1" : "0")
 endfunction
 
-autocmd BufWritePost *.js :call JsCheckSyntax()
+"2013-04-13
+function! JsCheckOfjavascriptLint()
+    "setlocal makeprg=\/usr/local/jsl/jsl\ -nologo\ -nofilelisting\ -nosummary\ -nocontext\ -conf\ '/usr/local/jsl/jsl.conf'\ -process\ %
+    setlocal makeprg=\/usr/local/jsl/jsl\ -nologo\ -nofilelisting\ -conf\ '/usr/local/jsl/jsl.conf'\ -process\ %
+    setlocal errorformat=%f(%l):\ %m
+    make
+endfunction
+
+"autocmd BufWritePost *.js :call JsCheckSyntax()
 "autocmd BufWritePost *.js :call JsLintCheckSyntax()
+autocmd BufWritePost *.js :call JsCheckOfjavascriptLint()
 
 

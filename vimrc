@@ -1,3 +1,6 @@
+set nocompatible
+set fileencodings=utf-8,gbk
+
 :set number
 
 :colorscheme desert
@@ -13,6 +16,8 @@ set cursorline
 set expandtab
 set tabstop=4
 set shiftwidth=4
+
+set encoding=utf-8
 
 filetype indent on
 :filetype plugin on
@@ -71,4 +76,6 @@ endfunction
 "autocmd BufWritePost *.js :call JsLintCheckSyntax()
 autocmd BufWritePost *.js :call JsCheckOfjavascriptLint()
 
+let g:user_zen_expandabbr_key = '<F2>'
 
+nnoremap <F4> :call g:Jsbeautify()<CR>

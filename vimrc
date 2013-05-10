@@ -72,9 +72,19 @@ function! JsCheckOfjavascriptLint()
     make
 endfunction
 
+function! SftpFileToServer()
+    "echo getcwd()
+    let root_path = getcwd()
+    let sftp_cmd = "!/home/dragon/vim_plugins/sftp_server.sh '".root_path."' '%:p' &" 
+    execute sftp_cmd
+    "!/home/dragon/vim_plugins/sftp_server.sh root_path current_file
+endfunction
+
 "autocmd BufWritePost *.js :call JsCheckSyntax()
 "autocmd BufWritePost *.js :call JsLintCheckSyntax()
 autocmd BufWritePost *.js :call JsCheckOfjavascriptLint()
+
+autocmd BufWritePost *.* :call SftpFileToServer()
 
 let g:user_zen_expandabbr_key = '<F2>'
 

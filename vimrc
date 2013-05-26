@@ -80,11 +80,18 @@ function! SftpFileToServer()
     "!/home/dragon/vim_plugins/sftp_server.sh root_path current_file
 endfunction
 
+function! RebuildTags()
+    let root_path = getcwd()
+    let cmd = "!/home/dragon/vim_plugins/rebuild_tag.sh '".root_path."' &" 
+    execute cmd
+endfunction
+
 "autocmd BufWritePost *.js :call JsCheckSyntax()
 "autocmd BufWritePost *.js :call JsLintCheckSyntax()
 autocmd BufWritePost *.js :call JsCheckOfjavascriptLint()
 
 autocmd BufWritePost *.* :call SftpFileToServer()
+autocmd BufWritePost *.* :call RebuildTags()
 
 let g:user_zen_expandabbr_key = '<F2>'
 

@@ -20,10 +20,14 @@ set shiftwidth=4
 set encoding=utf-8
 
 filetype indent on
-:filetype plugin on
+filetype plugin on
 filetype plugin indent on
-autocmd filetype FileType python set omnifunc=pythoncomplete#Complete
-autocmd filetype FileType php set omnifunc=phpcomplete#Complete
+"autocmd filetype FileType python set omnifunc=pythoncomplete#Complete
+"autocmd filetype FileType php set omnifunc=phpcomplete#Complete
+autocmd FileType python set omnifunc=pythoncomplete#Complete
+"autocmd FileType php set omnifunc=phpcomplete#Complete
+
+autocmd FileType php set completefunc=phpcomplete#CompletePHP
 
 set autoindent
 set completeopt=longest,menu
@@ -82,12 +86,14 @@ endfunction
 
 function! RebuildTags()
     let root_path = getcwd()
-    let cmd = "!/home/dragon/vim_plugins/rebuild_tag.sh '".root_path."' &" 
+    "let cmd = "!/home/dragon/vim_plugins/rebuild_tag.sh '".root_path."' &" 
+    let cmd = "!/home/dragon/vim_plugins/rebuild_code_index.py '".root_path."' &" 
     execute cmd
 endfunction
 
 "autocmd BufWritePost *.js :call JsCheckSyntax()
 "autocmd BufWritePost *.js :call JsLintCheckSyntax()
+
 autocmd BufWritePost *.js :call JsCheckOfjavascriptLint()
 
 autocmd BufWritePost *.* :call SftpFileToServer()
@@ -96,3 +102,12 @@ autocmd BufWritePost *.* :call RebuildTags()
 let g:user_zen_expandabbr_key = '<F2>'
 
 nnoremap <F4> :call g:Jsbeautify()<CR>
+
+"au FileType php call AutoCompleteFunction()
+"function! AutoCompleteFunction()
+"    set dictionary-=/home/dragon/vim_plugins/php_function_list.txt
+"    set dictionary+=/home/dragon/vim_plugins/php_function_list.txt
+"
+"    set complete-=k
+"    set complete+=k
+"endfunction
